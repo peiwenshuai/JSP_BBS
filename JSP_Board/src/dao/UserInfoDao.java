@@ -16,7 +16,7 @@ public class UserInfoDao {
 	private boolean isLoginSuccess = false;
 
 	public boolean processUserLogin(String userId, String userPwd) {
-		final String SQL = "SELECT * FROM user_info WHERE user_id=?, user_pwd=?";
+		final String SQL = "SELECT * FROM user_info WHERE user_id=? AND user_pwd=?";
 
 		try {
 			connection = DBConnection.getDbConnection();
