@@ -17,7 +17,6 @@ public class UserInfoDao {
 
 	public boolean processUserLogin(String userId, String userPwd) {
 		final String SQL = "SELECT * FROM user_info WHERE user_id=? AND user_pwd=?";
-
 		try {
 			connection = DBConnection.getDbConnection();
 			pstm = connection.prepareStatement(SQL);
@@ -28,15 +27,10 @@ public class UserInfoDao {
 			if (rs.next()) {
 				isLoginSuccess = true;
 			}
-
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
-
 		return isLoginSuccess;
-
 	}
-
 }
