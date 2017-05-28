@@ -2,6 +2,6 @@
 My JSP/Servlet BBS Project
 
 
-2017.05.28
-프로젝트 구성 및 git연동
+2017.05.28<br>
+프로젝트 구성 및 git연동<br>
 개발환경 : tomcat 8.5, maria DB(DB명 jsp_board)
