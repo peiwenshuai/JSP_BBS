@@ -1,1 +1,10 @@
 /build/
+/bin/
+target/
+
+
+*.jar
+*.war
+*.ear
+*.db
+*.sql
