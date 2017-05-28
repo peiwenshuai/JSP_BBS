@@ -21,35 +21,31 @@
 }
 
 </style>
-<title>Insert title here</title>
+<title>Login Fail</title>
 </head>
 <body>
+	<div id="content-header">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.jsp">JSP Board Made By. devBae</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="index.jsp">Go to Login Page</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	
+	<div id="content-body">
+		<div class="jumbotron text-center">
+  			<h1>Login Fail <img src="resources/images/login_fail.png" alt="fail" width="42" height="42"></h1>
+  			<p>Please check your id and password</p> 
+		</div>
+	</div>
 
-<div class="jumbotron text-center">
-  <h1>Login Fail</h1>
-  <p>Resize this responsive page to see the effect!</p> 
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Column 1</h3>
-      <p>Lorem ipsum dolor..</p>
-      <p>Ut enim ad..</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 2</h3>
-      <p>Lorem ipsum dolor..</p>
-      <p>Ut enim ad..</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 3</h3> 
-      <p>Lorem ipsum dolor..</p>
-      <p>Ut enim ad..</p>
-    </div>
-  </div>
-</div>
-
+	<div id="content-footer">
+	</div>
 
 </body>
 </html>

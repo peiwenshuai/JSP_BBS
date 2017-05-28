@@ -8,22 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.UserInfoBean;
-import model.LoginModel;
 import util.UrlSplitHelper;
 
 /**
- * Servlet implementation class Controller
+ * Servlet implementation class BoardController
  */
-@WebServlet("/loginController/*")
-public class LoginController extends HttpServlet {
+@WebServlet("/boardController/*")
+public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpSession session = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginController() {
+	public BoardController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,35 +32,10 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Call loginContoroller..");
+		System.out.println("Call boardContoroller..");
 		String servletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
 		session = request.getSession();
-		LoginModel loginModel = new LoginModel();
-		UserInfoBean userInfoBean = new UserInfoBean();
 
-		switch (servletName) {
-		case "user_register.do":
-			userInfoBean.setUserId(request.getParameter("userId"));
-			userInfoBean.setUserPwd(request.getParameter("userPwd"));
-			userInfoBean.setUserName(request.getParameter("userName"));
-			userInfoBean.setUserAge(Integer.valueOf(request.getParameter("userAge")));
-			userInfoBean.setUserGender(request.getParameter("userGender"));
-			loginModel.processUserRegi(userInfoBean);
-			break;
-
-		case "login.do":
-			if (loginModel.processLogin(request.getParameter("userId"), request.getParameter("userPwd"))) {
-				session.setAttribute("userId", request.getParameter("userId"));
-			} else {
-				response.sendRedirect("../login_fail.jsp");
-			}
-			break;
-
-		case "login_out.do":
-			session.invalidate();
-			response.sendRedirect("../index.jsp");
-			break;
-		}
 	}
 
 	/**

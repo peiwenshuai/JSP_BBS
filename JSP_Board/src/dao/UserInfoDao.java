@@ -27,10 +27,30 @@ public class UserInfoDao {
 			if (rs.next()) {
 				isLoginSuccess = true;
 			}
+			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+
 			return false;
 		}
 		return isLoginSuccess;
 	}
+
+	public void processUserReg(UserInfoBean userInfoBean) {
+		final String SQL = "INSERT INTO user_info(user_id, user_pwd, user_name, user_age, user_gender, user_regi_date) VALUES (?, ?, ?, ?, ?, now())";
+		try {
+			connection = DBConnection.getDbConnection();
+			pstm = connection.prepareStatement(SQL);
+			pstm.setString(1, userInfoBean.getUserId());
+			pstm.setString(2, userInfoBean.getUserPwd());
+			pstm.setString(3, userInfoBean.getUserName());
+			pstm.setInt(4, userInfoBean.getUserAge());
+			pstm.setString(5, userInfoBean.getUserGender());
+			pstm.executeQuery();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
