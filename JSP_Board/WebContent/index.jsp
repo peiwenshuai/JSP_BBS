@@ -11,5 +11,5 @@
 </html>
 
 <script type="text/javascript">
-location.href = "login.jsp";
+location.href = "loginController/login_view.do";
 </script>

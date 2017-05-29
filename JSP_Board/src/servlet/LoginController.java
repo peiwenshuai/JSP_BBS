@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +38,7 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("Call loginContoroller..");
+		request.setCharacterEncoding("UTF-8");
 		String servletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
 		session = request.getSession();
 		PrintWriter pw = response.getWriter();
@@ -44,6 +46,9 @@ public class LoginController extends HttpServlet {
 		UserInfoBean userInfoBean = new UserInfoBean();
 
 		switch (servletName) {
+		case "login_view.do" : 
+			response.sendRedirect("../login.jsp");
+			break;
 		case "user_id_check.do":
 			userInfoBean.setUserId(request.getParameter("userId"));
 			if (loginModel.processCheckId(userInfoBean)) {
@@ -62,6 +67,7 @@ public class LoginController extends HttpServlet {
 		case "login.do":
 			if (loginModel.processLogin(request.getParameter("userId"), request.getParameter("userPwd"))) {
 				session.setAttribute("userId", request.getParameter("userId"));
+				response.sendRedirect("../boardController/board_main.do");
 			} else {
 				response.sendRedirect("../login_fail.jsp");
 			}

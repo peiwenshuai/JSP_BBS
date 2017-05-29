@@ -82,5 +82,4 @@ var userRegi = (function() {
 		},
 	}
 
-
 })();
