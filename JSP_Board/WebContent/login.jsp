@@ -38,8 +38,7 @@
 						devBae</a>
 				</div>
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Main</a></li>
-					<li><a href="#">BBS</a></li>
+					<li><a href="boardController/board_main.do">BBS</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">

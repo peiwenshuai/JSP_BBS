@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
 		UserInfoBean userInfoBean = new UserInfoBean();
 
 		switch (servletName) {
-		case "login_view.do" : 
+		case "login_view.do":
 			response.sendRedirect("../login.jsp");
 			break;
 		case "user_id_check.do":
@@ -73,7 +73,7 @@ public class LoginController extends HttpServlet {
 			}
 			break;
 
-		case "login_out.do":
+		case "logout.do":
 			session.invalidate();
 			response.sendRedirect("../index.jsp");
 			break;

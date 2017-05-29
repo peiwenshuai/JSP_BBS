@@ -44,8 +44,10 @@ var userRegi = (function() {
 				dataType : "text",
 			}).done(function(data) {
 				alert("User Add Success. Do Login!");
+				$("#myModal").modal('hide');
 			}).fail(function(data) {
 				alert("User Add Fail.");
+				$("#myModal").modal('hide');
 			});
 
 		},

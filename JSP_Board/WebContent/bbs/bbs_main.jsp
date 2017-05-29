@@ -36,16 +36,15 @@
 						devBae</a>
 				</div>
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">BBS</a></li>
+					<li class="active"><a href="board_main.do">BBS</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
-						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+						<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: #222; color: white; height: 50px">
 							접속하기 <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-							<li class="active"><a href="login.jsp">Login</a></li>
-							<li><a href="#">회원가입</a></li>
+							<li><a href="../loginController/logout.do">Login Out</a></li>
 						</ul>
 					</li>
 				</ul>
