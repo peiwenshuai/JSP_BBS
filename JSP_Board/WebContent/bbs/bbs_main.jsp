@@ -44,7 +44,7 @@
 							접속하기 <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a href="../loginController/logout.do">Login Out</a></li>
+							<li><a href="../logoutController/logout.do">Login Out</a></li>
 						</ul>
 					</li>
 				</ul>

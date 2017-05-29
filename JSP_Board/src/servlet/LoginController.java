@@ -45,6 +45,11 @@ public class LoginController extends HttpServlet {
 		LoginModel loginModel = new LoginModel();
 		UserInfoBean userInfoBean = new UserInfoBean();
 
+		if (session.getAttribute("userId") != null) {
+			response.sendRedirect("../boardController/board_main.do");
+			return;
+		}
+		
 		switch (servletName) {
 		case "login_view.do":
 			response.sendRedirect("../login.jsp");
@@ -71,11 +76,6 @@ public class LoginController extends HttpServlet {
 			} else {
 				response.sendRedirect("../login_fail.jsp");
 			}
-			break;
-
-		case "logout.do":
-			session.invalidate();
-			response.sendRedirect("../index.jsp");
 			break;
 		}
 	}
