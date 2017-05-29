@@ -8,12 +8,15 @@ public class LoginModel {
 	private UserInfoDao userInfoDao = new UserInfoDao();
 	
 	public boolean processLogin(String userId, String userPwd){
-		boolean isLoginResult = userInfoDao.processUserLogin(userId, userPwd);
-		return isLoginResult;
+		return userInfoDao.processUserLogin(userId, userPwd);
 	}
 	
 	public void processUserRegi(UserInfoBean userInfoBean){
 		userInfoDao.processUserReg(userInfoBean);
+	}
+	
+	public boolean processCheckId(UserInfoBean userInfoBean){
+		return userInfoDao.processUserCheckId(userInfoBean);
 	}
 
 }

@@ -30,7 +30,6 @@ public class UserInfoDao {
 			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-
 			return false;
 		}
 		return isLoginSuccess;
@@ -51,6 +50,25 @@ public class UserInfoDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean processUserCheckId(UserInfoBean userInfoBean){
+		final String SQL = "SELECT * FROM user_info WHERE user_id=?";
+		try{
+			connection = DBConnection.getDbConnection();
+			pstm = connection.prepareStatement(SQL);
+			pstm.setString(1, userInfoBean.getUserId());
+			rs = pstm.executeQuery();
+			connection.close();	
+			if(rs != null && rs.next()){
+				return true; //Id가 존재시, true
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return true;
+		}
+		
+		return false;
 	}
 
 }

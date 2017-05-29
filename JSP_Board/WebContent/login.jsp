@@ -102,6 +102,21 @@
       </div>
     </div>
     <div class="form-group">
+    <label class="control-label col-sm-2">Check ID:</label>
+    <div class="col-sm-3">    
+    <button type="button" class="btn btn-info" onclick="userRegi._checkIdPro()">Check</button>
+        <input type="hidden" id="id_check" value="">
+    </div>
+    <div class="col-sm-7">    
+    	<div class="alert alert-info" id="check_success" style="margin: 0px; padding: 6px; display: none;">
+    	<strong>Available!</strong> You can use this id.
+  		</div>
+  		<div class="alert alert-danger" id="check_fail" style="margin: 0px; padding: 6px; display: none;">
+    	<strong>Unavailable!</strong> Please input another id.
+  		</div>
+    </div>
+    </div>
+    <div class="form-group">
       <label class="control-label col-sm-2" for="pwd">Password:</label>
       <div class="col-sm-10">          
         <input type="password" class="form-control" id="pwd" placeholder="Enter password">
@@ -150,4 +165,4 @@
 <script>
 var contextPath = "${pageContext.request.contextPath}";
 </script>
-<script src="resources/js/regi.js"></script>
+<script src="resources/js/login.js"></script>

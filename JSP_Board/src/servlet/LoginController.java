@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,10 +39,17 @@ public class LoginController extends HttpServlet {
 		System.out.println("Call loginContoroller..");
 		String servletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
 		session = request.getSession();
+		PrintWriter pw = response.getWriter();
 		LoginModel loginModel = new LoginModel();
 		UserInfoBean userInfoBean = new UserInfoBean();
 
 		switch (servletName) {
+		case "user_id_check.do":
+			userInfoBean.setUserId(request.getParameter("userId"));
+			if (loginModel.processCheckId(userInfoBean)) {
+				pw.print(true);
+			}
+			break;
 		case "user_register.do":
 			userInfoBean.setUserId(request.getParameter("userId"));
 			userInfoBean.setUserPwd(request.getParameter("userPwd"));
