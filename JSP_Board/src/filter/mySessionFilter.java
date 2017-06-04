@@ -33,7 +33,7 @@ public class mySessionFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpSession session = request.getSession();
 		
-		if (session == null || session.getAttribute("userId") == null) {
+		if (session == null || session.getAttribute("userInfoBean") == null) {
 			response.sendRedirect("../index.jsp");
 		} else {
 			chain.doFilter(req, res);

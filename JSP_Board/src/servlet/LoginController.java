@@ -22,6 +22,7 @@ import util.UrlSplitHelper;
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpSession session = null;
+	private RequestDispatcher dis = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -45,7 +46,7 @@ public class LoginController extends HttpServlet {
 		LoginModel loginModel = new LoginModel();
 		UserInfoBean userInfoBean = new UserInfoBean();
 
-		if (session.getAttribute("userId") != null) {
+		if (session.getAttribute("userInfoBean") != null) {
 			response.sendRedirect("../boardController/board_main.do");
 			return;
 		}
@@ -70,8 +71,9 @@ public class LoginController extends HttpServlet {
 			break;
 
 		case "login.do":
-			if (loginModel.processLogin(request.getParameter("userId"), request.getParameter("userPwd"))) {
-				session.setAttribute("userId", request.getParameter("userId"));
+			UserInfoBean loginUserInfoBean = loginModel.processLogin(request.getParameter("userId"), request.getParameter("userPwd"));
+			if (loginUserInfoBean != null) {
+				session.setAttribute("userInfoBean", loginUserInfoBean);
 				response.sendRedirect("../boardController/board_main.do");
 			} else {
 				response.sendRedirect("../login_fail.jsp");

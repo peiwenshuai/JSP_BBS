@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.UserInfoBean;
+import model.BoardModel;
 import util.UrlSplitHelper;
 
 /**
@@ -38,11 +40,20 @@ public class BoardController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String servletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
 		session = request.getSession();
+		BoardModel boardModel = new BoardModel();
 
 		switch (servletName) {
 		case "board_main.do":
 			RequestDispatcher dis = request.getRequestDispatcher("/bbs/bbs_main.jsp");
 			dis.forward(request, response);
+			break;
+		case "board_write.do":
+			UserInfoBean userInfoBean = (UserInfoBean)session.getAttribute("userInfoBean");
+			int isSQL = boardModel.saveBoardContent(userInfoBean, request.getParameter("title"), request.getParameter("content"));
+			System.out.println(isSQL);
+			if(isSQL != 0){
+				response.sendRedirect("../boardController/board_main.do");	
+			}
 			break;
 		}
 

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import bean.UserInfoBean;
 import db.DBConnection;
@@ -13,26 +14,33 @@ public class UserInfoDao {
 	private PreparedStatement pstm = null;
 	private Connection connection = null;
 	private ResultSet rs = null;
-	private boolean isLoginSuccess = false;
 
-	public boolean processUserLogin(String userId, String userPwd) {
+	public UserInfoBean processUserLogin(String userId, String userPwd) {
 		final String SQL = "SELECT * FROM user_info WHERE user_id=? AND user_pwd=?";
+		UserInfoBean userInfoBean = new UserInfoBean();
 		try {
 			connection = DBConnection.getDbConnection();
 			pstm = connection.prepareStatement(SQL);
 			pstm.setString(1, userId);
 			pstm.setString(2, userPwd);
 			rs = pstm.executeQuery();
-
-			if (rs.next()) {
-				isLoginSuccess = true;
+			
+			while(rs.next()){	
+					userInfoBean.setUserIdx(rs.getInt(1));
+					userInfoBean.setUserId(rs.getString(2));
+					userInfoBean.setUserPwd(rs.getString(3));
+					userInfoBean.setUserName(rs.getString(4));
+					userInfoBean.setUserAge(rs.getInt(5));
+					userInfoBean.setUserGender(rs.getString(6));
+					userInfoBean.setUserRegiDate(rs.getDate(7).toLocalDate());
 			}
 			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
-		return isLoginSuccess;
+		
+		return userInfoBean;
 	}
 
 	public void processUserReg(UserInfoBean userInfoBean) {

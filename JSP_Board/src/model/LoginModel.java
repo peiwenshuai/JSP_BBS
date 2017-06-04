@@ -7,7 +7,7 @@ public class LoginModel {
 	
 	private UserInfoDao userInfoDao = new UserInfoDao();
 	
-	public boolean processLogin(String userId, String userPwd){
+	public UserInfoBean processLogin(String userId, String userPwd){
 		return userInfoDao.processUserLogin(userId, userPwd);
 	}
 	
