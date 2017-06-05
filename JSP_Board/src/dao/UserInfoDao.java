@@ -17,29 +17,30 @@ public class UserInfoDao {
 
 	public UserInfoBean processUserLogin(String userId, String userPwd) {
 		final String SQL = "SELECT * FROM user_info WHERE user_id=? AND user_pwd=?";
-		UserInfoBean userInfoBean = new UserInfoBean();
+		UserInfoBean userInfoBean = null;
 		try {
 			connection = DBConnection.getDbConnection();
 			pstm = connection.prepareStatement(SQL);
 			pstm.setString(1, userId);
 			pstm.setString(2, userPwd);
 			rs = pstm.executeQuery();
-			
-			while(rs.next()){	
-					userInfoBean.setUserIdx(rs.getInt(1));
-					userInfoBean.setUserId(rs.getString(2));
-					userInfoBean.setUserPwd(rs.getString(3));
-					userInfoBean.setUserName(rs.getString(4));
-					userInfoBean.setUserAge(rs.getInt(5));
-					userInfoBean.setUserGender(rs.getString(6));
-					userInfoBean.setUserRegiDate(rs.getDate(7).toLocalDate());
+
+			while (rs.next()) {
+				userInfoBean = new UserInfoBean();
+				userInfoBean.setUserIdx(rs.getInt(1));
+				userInfoBean.setUserId(rs.getString(2));
+				userInfoBean.setUserPwd(rs.getString(3));
+				userInfoBean.setUserName(rs.getString(4));
+				userInfoBean.setUserAge(rs.getInt(5));
+				userInfoBean.setUserGender(rs.getString(6));
+				userInfoBean.setUserRegiDate(rs.getDate(7).toLocalDate());
 			}
 			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		return userInfoBean;
 	}
 
@@ -59,23 +60,23 @@ public class UserInfoDao {
 			e.printStackTrace();
 		}
 	}
-	
-	public boolean processUserCheckId(UserInfoBean userInfoBean){
+
+	public boolean processUserCheckId(UserInfoBean userInfoBean) {
 		final String SQL = "SELECT * FROM user_info WHERE user_id=?";
-		try{
+		try {
 			connection = DBConnection.getDbConnection();
 			pstm = connection.prepareStatement(SQL);
 			pstm.setString(1, userInfoBean.getUserId());
 			rs = pstm.executeQuery();
-			connection.close();	
-			if(rs != null && rs.next()){
-				return true; //Id가 존재시, true
+			connection.close();
+			if (rs != null && rs.next()) {
+				return true; // Id가 존재시, true
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return true;
 		}
-		
+
 		return false;
 	}
 

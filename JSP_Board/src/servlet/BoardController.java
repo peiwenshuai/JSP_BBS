@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.BoardInfoBean;
 import bean.UserInfoBean;
 import model.BoardModel;
 import util.UrlSplitHelper;
@@ -44,15 +46,17 @@ public class BoardController extends HttpServlet {
 
 		switch (servletName) {
 		case "board_main.do":
+			List<BoardInfoBean> boardInfoBeanList = boardModel.getBoardContent();
+			request.setAttribute("boardInfoBeanList", boardInfoBeanList);
 			RequestDispatcher dis = request.getRequestDispatcher("/bbs/bbs_main.jsp");
 			dis.forward(request, response);
 			break;
 		case "board_write.do":
-			UserInfoBean userInfoBean = (UserInfoBean)session.getAttribute("userInfoBean");
+			UserInfoBean userInfoBean = (UserInfoBean) session.getAttribute("userInfoBean");
 			int isSQL = boardModel.saveBoardContent(userInfoBean, request.getParameter("title"), request.getParameter("content"));
 			System.out.println(isSQL);
-			if(isSQL != 0){
-				response.sendRedirect("../boardController/board_main.do");	
+			if (isSQL != 0) {
+				response.sendRedirect("../boardController/board_main.do");
 			}
 			break;
 		}
