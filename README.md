@@ -14,3 +14,7 @@ My JSP/Servlet BBS Project
 bbs_info 라는 테이블 생성 및 BoardInfoBean 및 BoardInfoDao 작성 + 글 작성 시, insert 되는 기능 구현.<br>
 session 값 변경(userInfoBean) + jsp/servlet 호출 시, 리소스 경로 충돌나서 El 내장객체를 사용해서 해결 ${pageContext.request.contextPath}<br>
 개발환경 : tomcat 8.5, maria DB(DB명 jsp_board), Java 1.8, jQuery, BootStrap <br>
+<br>
+2017.06.05<br>
+게시판 메인페이지, List 불러오는 기능 구현(EL과 JSTL을 이용해서 구현) + 로그인 시, 로직상 문제 있던 코드 부분 수정<br>
+개발환경 : tomcat 8.5, maria DB(DB명 jsp_board), Java 1.8, jQuery, BootStrap <br>
