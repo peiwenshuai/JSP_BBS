@@ -23,6 +23,7 @@ import util.UrlSplitHelper;
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpSession session = null;
+	private final int VIEW_PAGE_COUNT = 10;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -39,6 +40,7 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("Call boardContoroller..");
+		final int perPage = 10;
 		request.setCharacterEncoding("UTF-8");
 		String servletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
 		session = request.getSession();
@@ -46,12 +48,23 @@ public class BoardController extends HttpServlet {
 
 		switch (servletName) {
 		case "board_main.do":
+			//Read(Board List)
+		
 			List<BoardInfoBean> boardInfoBeanList = boardModel.getBoardContent();
+			int allPageCnt = boardModel.getBoardCount();
+			int linkPage = 0;
+			if(allPageCnt % perPage == 0){
+				linkPage = (allPageCnt / perPage);
+			}else{
+				linkPage = (allPageCnt / perPage) + 1;
+			}
+			request.setAttribute("linkPage", linkPage);
 			request.setAttribute("boardInfoBeanList", boardInfoBeanList);
 			RequestDispatcher dis = request.getRequestDispatcher("/bbs/bbs_main.jsp");
 			dis.forward(request, response);
 			break;
 		case "board_write.do":
+			//Create
 			UserInfoBean userInfoBean = (UserInfoBean) session.getAttribute("userInfoBean");
 			int isSQL = boardModel.saveBoardContent(userInfoBean, request.getParameter("title"), request.getParameter("content"));
 			System.out.println(isSQL);

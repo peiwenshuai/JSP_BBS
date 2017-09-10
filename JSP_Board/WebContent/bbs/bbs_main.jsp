@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% request.setCharacterEncoding("UTF-8"); %>
+<% 
+request.setCharacterEncoding("UTF-8"); 
+%>
 <!DOCTYPE>
 <html>
 <head>
@@ -54,9 +56,9 @@
 
 	</div>
 	<div id="content-body">
-<table class="table">
+<table class="table" style="width: 65%;margin: auto;">
     <thead>
-      <tr>
+      <tr style="text-align: center">
         <th>No.</th>
         <th>Id.</th>
         <th>Title</th>
@@ -84,6 +86,12 @@
 		
 	</div>
 	<div id="content-footer"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Write</button></div>
+<ul class="pagination">
+<c:forEach begin="1" end="${linkPage}"  varStatus="status">
+  <li onclick="boardController._pageMove(${status.count})"><a href="javascript:void(0);">${status.count}</a></li>
+</c:forEach>
+</ul>
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -126,4 +134,7 @@
 
 </body>
 </html>
+<script>
+var contextPath = "${pageContext.request.contextPath}";
+</script>
 <script src="${pageContext.request.contextPath}/resources/js/bbs_main.js"></script>

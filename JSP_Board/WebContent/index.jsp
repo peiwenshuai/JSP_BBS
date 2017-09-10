@@ -10,6 +10,6 @@
 </body>
 </html>
 
-<script type="text/javascript">
+<script>
 location.href = "loginController/login_view.do";
 </script>

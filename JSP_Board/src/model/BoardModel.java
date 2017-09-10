@@ -26,5 +26,9 @@ public class BoardModel {
 
 		return boardInfoDao.getBoardContent();
 	}
+	
+	public int getBoardCount(){
+		return boardInfoDao.getBoardContentCount();
+	}
 
 }
