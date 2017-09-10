@@ -39,8 +39,10 @@ public class BoardInfoDao {
 
 	}
 
-	public List<BoardInfoBean> getBoardContent() {
-		final String SQL = "SELECT * FROM bbs_info";
+	public List<BoardInfoBean> getBoardContent(int pageIndex) {
+		int startRow = (pageIndex * 10) - 10;
+		
+		final String SQL = "SELECT * FROM bbs_info LIMIT " + startRow + ", 10";
 		List<BoardInfoBean> boardInfoBeanList = new ArrayList<>();
 		try {
 			connection = DBConnection.getDbConnection();

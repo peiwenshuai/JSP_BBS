@@ -23,6 +23,7 @@ import util.UrlSplitHelper;
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpSession session = null;
+	private final int perPage = 10;
 	private final int VIEW_PAGE_COUNT = 10;
 
 	/**
@@ -40,22 +41,25 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("Call boardContoroller..");
-		final int perPage = 10;
 		request.setCharacterEncoding("UTF-8");
 		String servletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
 		session = request.getSession();
+		int pageIndex = 1;
+
 		BoardModel boardModel = new BoardModel();
 
 		switch (servletName) {
 		case "board_main.do":
-			//Read(Board List)
-		
-			List<BoardInfoBean> boardInfoBeanList = boardModel.getBoardContent();
+			// Read(Board List)
+			if (request.getParameter("pageIndex") != null) {
+				pageIndex = Integer.valueOf(request.getParameter("pageIndex"));
+			}
+			List<BoardInfoBean> boardInfoBeanList = boardModel.getBoardContent(pageIndex);
 			int allPageCnt = boardModel.getBoardCount();
 			int linkPage = 0;
-			if(allPageCnt % perPage == 0){
+			if (allPageCnt % perPage == 0) {
 				linkPage = (allPageCnt / perPage);
-			}else{
+			} else {
 				linkPage = (allPageCnt / perPage) + 1;
 			}
 			request.setAttribute("linkPage", linkPage);
@@ -64,9 +68,10 @@ public class BoardController extends HttpServlet {
 			dis.forward(request, response);
 			break;
 		case "board_write.do":
-			//Create
+			// Create
 			UserInfoBean userInfoBean = (UserInfoBean) session.getAttribute("userInfoBean");
-			int isSQL = boardModel.saveBoardContent(userInfoBean, request.getParameter("title"), request.getParameter("content"));
+			int isSQL = boardModel.saveBoardContent(userInfoBean, request.getParameter("title"),
+					request.getParameter("content"));
 			System.out.println(isSQL);
 			if (isSQL != 0) {
 				response.sendRedirect("../boardController/board_main.do");
@@ -76,10 +81,6 @@ public class BoardController extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);

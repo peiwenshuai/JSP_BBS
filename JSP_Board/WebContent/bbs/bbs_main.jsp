@@ -70,7 +70,7 @@ request.setCharacterEncoding("UTF-8");
     	<c:when test="${!empty boardInfoBeanList}">
     		<c:forEach var="item" items="${boardInfoBeanList}" varStatus="status">
     			<tr>
-    			<td>${status.count}</td>
+    			<td>${item.boardIdx}</td>
     			<td>${item.userId}</td>
     			<td>${item.boardTitle}</td>
     			<td>${item.viewCnt}</td>
@@ -137,4 +137,4 @@ request.setCharacterEncoding("UTF-8");
 <script>
 var contextPath = "${pageContext.request.contextPath}";
 </script>
-<script src="${pageContext.request.contextPath}/resources/js/bbs_main.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bbs.js"></script>

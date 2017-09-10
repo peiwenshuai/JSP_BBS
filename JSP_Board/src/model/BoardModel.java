@@ -22,9 +22,9 @@ public class BoardModel {
 		return boardInfoDao.saveBoardContent(boardInfoBean, title, content);
 	}
 
-	public List<BoardInfoBean> getBoardContent() {
+	public List<BoardInfoBean> getBoardContent(int pageIndex) {
 
-		return boardInfoDao.getBoardContent();
+		return boardInfoDao.getBoardContent(pageIndex);
 	}
 	
 	public int getBoardCount(){
