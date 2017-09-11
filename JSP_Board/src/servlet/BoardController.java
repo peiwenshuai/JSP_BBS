@@ -23,8 +23,7 @@ import util.UrlSplitHelper;
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpSession session = null;
-	private final int perPage = 10;
-	private final int VIEW_PAGE_COUNT = 10;
+	private final int PER_PAGE = 10;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -57,16 +56,18 @@ public class BoardController extends HttpServlet {
 			List<BoardInfoBean> boardInfoBeanList = boardModel.getBoardContent(pageIndex);
 			int allPageCnt = boardModel.getBoardCount();
 			int linkPage = 0;
-			if (allPageCnt % perPage == 0) {
-				linkPage = (allPageCnt / perPage);
+			if (allPageCnt % PER_PAGE == 0) {
+				linkPage = (allPageCnt / PER_PAGE);
 			} else {
-				linkPage = (allPageCnt / perPage) + 1;
+				linkPage = (allPageCnt / PER_PAGE) + 1;
 			}
-			request.setAttribute("linkPage", linkPage);
+			
 			request.setAttribute("boardInfoBeanList", boardInfoBeanList);
+			request.setAttribute("linkPage", linkPage);
 			request.setAttribute("pageIndex", pageIndex);
-			request.setAttribute("nextPageIndex", pageIndex == linkPage ? pageIndex:pageIndex+1);
-			request.setAttribute("prevPageIndex", pageIndex == 1 ? pageIndex:pageIndex-1);
+			request.setAttribute("endPageIndex", (pageIndex + 2 > linkPage) ? linkPage : pageIndex + 2);
+			request.setAttribute("nextPageIndex", pageIndex == linkPage ? pageIndex : pageIndex + 1);
+			request.setAttribute("prevPageIndex", pageIndex == 1 ? pageIndex : pageIndex - 1);
 			RequestDispatcher dis = request.getRequestDispatcher("/bbs/bbs_main.jsp");
 			dis.forward(request, response);
 			break;
