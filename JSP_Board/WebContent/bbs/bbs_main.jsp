@@ -87,9 +87,20 @@ request.setCharacterEncoding("UTF-8");
 	</div>
 	<div id="content-footer"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Write</button></div>
 <ul class="pagination">
+<li onclick="boardController._pageMove(1)"><a href="javascript:void(0);"><<</a></li>
+<li onclick="boardController._pageMove(${prevPageIndex})"><a href="javascript:void(0);"><</a></li>
 <c:forEach begin="1" end="${linkPage}"  varStatus="status">
-  <li onclick="boardController._pageMove(${status.count})"><a href="javascript:void(0);">${status.count}</a></li>
+   <c:choose>
+   		<c:when test="${pageIndex eq  status.count}">
+   		<li class="active" onclick="boardController._pageMove(${status.count})"><a href="javascript:void(0);">${status.count}</a></li>
+   		</c:when>
+   		<c:otherwise>
+   		<li onclick="boardController._pageMove(${status.count})"><a href="javascript:void(0);">${status.count}</a></li>
+   		</c:otherwise>
+   </c:choose>
 </c:forEach>
+<li onclick="boardController._pageMove(${nextPageIndex})"><a href="javascript:void(0);">></a></li>
+<li onclick="boardController._pageMove(${linkPage})"><a href="javascript:void(0);">>></a></li>
 </ul>
 
 

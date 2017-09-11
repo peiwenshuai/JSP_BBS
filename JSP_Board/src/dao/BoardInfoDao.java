@@ -41,7 +41,7 @@ public class BoardInfoDao {
 
 	public List<BoardInfoBean> getBoardContent(int pageIndex) {
 		int startRow = (pageIndex * 10) - 10;
-		
+
 		final String SQL = "SELECT * FROM bbs_info ORDER BY board_idx DESC LIMIT " + startRow + ", 10";
 		List<BoardInfoBean> boardInfoBeanList = new ArrayList<>();
 		try {

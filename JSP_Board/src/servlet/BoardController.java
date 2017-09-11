@@ -64,6 +64,9 @@ public class BoardController extends HttpServlet {
 			}
 			request.setAttribute("linkPage", linkPage);
 			request.setAttribute("boardInfoBeanList", boardInfoBeanList);
+			request.setAttribute("pageIndex", pageIndex);
+			request.setAttribute("nextPageIndex", pageIndex == linkPage ? pageIndex:pageIndex+1);
+			request.setAttribute("prevPageIndex", pageIndex == 1 ? pageIndex:pageIndex-1);
 			RequestDispatcher dis = request.getRequestDispatcher("/bbs/bbs_main.jsp");
 			dis.forward(request, response);
 			break;
