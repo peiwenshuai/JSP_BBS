@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -6,10 +7,10 @@
 <title>JSP Board</title>
 </head>
 <body>
- 
+
 </body>
 </html>
 
 <script>
-location.href = "loginController/login_view.do";
+	location.href = "loginController/login_view.do";
 </script>
