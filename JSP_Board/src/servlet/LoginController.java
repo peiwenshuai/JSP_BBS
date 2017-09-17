@@ -15,30 +15,18 @@ import bean.UserInfoBean;
 import model.LoginModel;
 import util.UrlSplitHelper;
 
-/**
- * Servlet implementation class Controller
- */
 @WebServlet("/loginController/*")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpSession session = null;
 	private RequestDispatcher dis = null;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public LoginController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Call loginContoroller..");
 		request.setCharacterEncoding("UTF-8");
 		String servletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
 		session = request.getSession();
@@ -50,17 +38,20 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect("../boardController/board_main.do");
 			return;
 		}
-		
+
 		switch (servletName) {
+
 		case "login_view.do":
 			response.sendRedirect("../login.jsp");
 			break;
+
 		case "user_id_check.do":
 			userInfoBean.setUserId(request.getParameter("userId"));
 			if (loginModel.processCheckId(userInfoBean)) {
 				pw.print(true);
 			}
 			break;
+
 		case "user_register.do":
 			userInfoBean.setUserId(request.getParameter("userId"));
 			userInfoBean.setUserPwd(request.getParameter("userPwd"));
@@ -82,10 +73,6 @@ public class LoginController extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
