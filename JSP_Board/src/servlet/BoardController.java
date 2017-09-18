@@ -25,18 +25,10 @@ public class BoardController extends HttpServlet {
 	private HttpSession session = null;
 	private final int PER_PAGE = 10;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public BoardController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("Call boardContoroller..");
@@ -61,16 +53,15 @@ public class BoardController extends HttpServlet {
 			} else {
 				linkPage = (allPageCnt / PER_PAGE) + 1;
 			}
-			
 			request.setAttribute("boardInfoBeanList", boardInfoBeanList);
 			request.setAttribute("linkPage", linkPage);
 			request.setAttribute("pageIndex", pageIndex);
-			request.setAttribute("endPageIndex", (pageIndex + 2 > linkPage) ? linkPage : pageIndex + 2);
 			request.setAttribute("nextPageIndex", pageIndex == linkPage ? pageIndex : pageIndex + 1);
 			request.setAttribute("prevPageIndex", pageIndex == 1 ? pageIndex : pageIndex - 1);
 			RequestDispatcher dis = request.getRequestDispatcher("/bbs/bbs_main.jsp");
 			dis.forward(request, response);
 			break;
+
 		case "board_write.do":
 			// Create
 			UserInfoBean userInfoBean = (UserInfoBean) session.getAttribute("userInfoBean");

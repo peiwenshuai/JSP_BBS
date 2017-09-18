@@ -23,7 +23,6 @@ public class BoardModel {
 	}
 
 	public List<BoardInfoBean> getBoardContent(int pageIndex) {
-
 		return boardInfoDao.getBoardContent(pageIndex);
 	}
 	
