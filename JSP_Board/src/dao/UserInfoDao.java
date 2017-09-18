@@ -70,7 +70,7 @@ public class UserInfoDao {
 			rs = pstm.executeQuery();
 			connection.close();
 			if (rs != null && rs.next()) {
-				return true; // Id가 존재시, true
+				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
