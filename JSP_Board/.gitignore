@@ -3,8 +3,6 @@
 target/
 
 
-*.jar
 *.war
 *.ear
 *.db
-*.sql
