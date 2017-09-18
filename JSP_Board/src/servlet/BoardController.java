@@ -31,12 +31,10 @@ public class BoardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Call boardContoroller..");
 		request.setCharacterEncoding("UTF-8");
 		String servletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
 		session = request.getSession();
 		int pageIndex = 1;
-
 		BoardModel boardModel = new BoardModel();
 
 		switch (servletName) {

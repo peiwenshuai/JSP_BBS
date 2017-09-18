@@ -5,6 +5,16 @@ var userRegi = (function() {
 	var userName;
 	var userAge;
 	var userGender;
+	var initModal = function () {
+		alert("test");
+		$("#id").val('');
+		$("#pwd").val('');
+		$("#name").val('');
+		$("#age").val('');
+		$("#check_success").hide();
+		$("#check_fail").hide();
+		$("#id_check").val('');	
+    }
 
 	return {
 		_regiPro : function() {
@@ -44,9 +54,11 @@ var userRegi = (function() {
 				dataType : "text",
 			}).done(function(data) {
 				alert("User Add Success. Do Login!");
+				initModal();
 				$("#myModal").modal('hide');
 			}).fail(function(data) {
 				alert("User Add Fail.");
+				initModal();
 				$("#myModal").modal('hide');
 			});
 
@@ -81,7 +93,6 @@ var userRegi = (function() {
 				console.log(data);
 			});
 
-		},
+		}
 	}
-
 })();

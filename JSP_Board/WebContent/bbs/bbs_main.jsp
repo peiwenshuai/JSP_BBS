@@ -86,7 +86,8 @@ request.setCharacterEncoding("UTF-8");
 		
 	</div>
 	<div id="content-footer"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Write</button></div>
-<ul class="pagination">
+	<c:if test="${linkPage ne 0}">
+	<ul class="pagination">
 <li onclick="boardController._pageMove(1)"><a href="javascript:void(0);"><<</a></li>
 <li onclick="boardController._pageMove(${prevPageIndex})"><a href="javascript:void(0);"><</a></li>
 <c:forEach begin="${prevPageIndex}" end="${nextPageIndex}"  varStatus="status">
@@ -102,7 +103,7 @@ request.setCharacterEncoding("UTF-8");
 <li onclick="boardController._pageMove(${nextPageIndex})"><a href="javascript:void(0);">></a></li>
 <li onclick="boardController._pageMove(${linkPage})"><a href="javascript:void(0);">>></a></li>
 </ul>
-
+	</c:if>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
