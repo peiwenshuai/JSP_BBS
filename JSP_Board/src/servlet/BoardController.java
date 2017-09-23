@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -22,39 +23,41 @@ import util.UrlSplitHelper;
 @WebServlet("/boardController/*")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final int PER_PAGE_DISPLAY_CONTENT = 10;
 	private HttpSession session = null;
-	private final int PER_PAGE = 10;
+	private RequestDispatcher dis = null;
+	private String requestSevletName = null;
+	private PrintWriter pw = null;
 
 	public BoardController() {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String servletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
+		requestSevletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
 		session = request.getSession();
 		int pageIndex = 1;
 		BoardModel boardModel = new BoardModel();
 
-		switch (servletName) {
+		switch (requestSevletName) {
 		case "board_main.do":
-			// Read(Board List)
+			// Read(List)
 			if (request.getParameter("pageIndex") != null) {
 				pageIndex = Integer.valueOf(request.getParameter("pageIndex"));
 			}
-			List<BoardInfoBean> boardInfoBeanList = boardModel.getBoardContent(pageIndex);
-			int allPageCnt = boardModel.getBoardCount();
-			int linkPage = 0;
-			if (allPageCnt % PER_PAGE == 0) {
-				linkPage = (allPageCnt / PER_PAGE);
+			int boardContentCnt = boardModel.getBoardCount();
+			List<BoardInfoBean> boardInfoBeanList = boardModel.getBoardContent(pageIndex, boardContentCnt);
+			int paginationLinkCnt = 0;
+			if (boardContentCnt % PER_PAGE_DISPLAY_CONTENT == 0) {
+				paginationLinkCnt = (boardContentCnt / PER_PAGE_DISPLAY_CONTENT);
 			} else {
-				linkPage = (allPageCnt / PER_PAGE) + 1;
+				paginationLinkCnt = (boardContentCnt / PER_PAGE_DISPLAY_CONTENT) + 1;
 			}
 			request.setAttribute("boardInfoBeanList", boardInfoBeanList);
-			request.setAttribute("linkPage", linkPage);
+			request.setAttribute("linkPage", paginationLinkCnt);
 			request.setAttribute("pageIndex", pageIndex);
-			request.setAttribute("nextPageIndex", pageIndex == linkPage ? pageIndex : pageIndex + 1);
+			request.setAttribute("nextPageIndex", pageIndex == paginationLinkCnt ? pageIndex : pageIndex + 1);
 			request.setAttribute("prevPageIndex", pageIndex == 1 ? pageIndex : pageIndex - 1);
 			RequestDispatcher dis = request.getRequestDispatcher("/bbs/bbs_main.jsp");
 			dis.forward(request, response);
@@ -63,14 +66,17 @@ public class BoardController extends HttpServlet {
 		case "board_write.do":
 			// Create
 			UserInfoBean userInfoBean = (UserInfoBean) session.getAttribute("userInfoBean");
-			int isSQL = boardModel.saveBoardContent(userInfoBean, request.getParameter("title"),
-					request.getParameter("content"));
-			System.out.println(isSQL);
+			int isSQL = boardModel.saveBoardContent(userInfoBean, request.getParameter("title"),	request.getParameter("content"));
 			if (isSQL != 0) {
 				response.sendRedirect("../boardController/board_main.do");
 			}
 			break;
+			
+		case "board_content_read.do" : 
+			
+			break;
 		}
+		
 
 	}
 

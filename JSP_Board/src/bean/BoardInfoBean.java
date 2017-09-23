@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class BoardInfoBean {
 
+	int boardNum;
 	int boardIdx;
 	int userIdx;
 	String userId;
@@ -12,6 +13,12 @@ public class BoardInfoBean {
 	String boardContent;
 	int viewCnt;
 	
+	public int getBoardNum() {
+		return boardNum;
+	}
+	public void setBoardNum(int boardNum) {
+		this.boardNum = boardNum;
+	}
 	public int getBoardIdx() {
 		return boardIdx;
 	}

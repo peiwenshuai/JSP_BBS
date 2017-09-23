@@ -161,7 +161,7 @@
 
 </body>
 </html>
-<script>
+<script type="text/javascript">
 var contextPath = "${pageContext.request.contextPath}";
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/login.js"></script>

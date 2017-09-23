@@ -20,6 +20,8 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpSession session = null;
 	private RequestDispatcher dis = null;
+	private String requestSevletName = null;
+	private PrintWriter pw = null;
 
 	public LoginController() {
 		super();
@@ -28,9 +30,9 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String servletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
+		requestSevletName = UrlSplitHelper.getDoUrl(request.getRequestURL().toString());
 		session = request.getSession();
-		PrintWriter pw = response.getWriter();
+		pw = response.getWriter();
 		LoginModel loginModel = new LoginModel();
 		UserInfoBean userInfoBean = new UserInfoBean();
 
@@ -39,7 +41,7 @@ public class LoginController extends HttpServlet {
 			return;
 		}
 
-		switch (servletName) {
+		switch (requestSevletName) {
 
 		case "login_view.do":
 			response.sendRedirect("../login.jsp");

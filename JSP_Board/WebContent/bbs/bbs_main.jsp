@@ -53,9 +53,9 @@ request.setCharacterEncoding("UTF-8");
 				</ul>
 			</div>
 		</nav>
+</div>
 
-	</div>
-	<div id="content-body">
+<div id="content-body">
 <table class="table" style="width: 65%;margin: auto;">
     <thead>
       <tr style="text-align: center">
@@ -70,9 +70,9 @@ request.setCharacterEncoding("UTF-8");
     	<c:when test="${!empty boardInfoBeanList}">
     		<c:forEach var="item" items="${boardInfoBeanList}" varStatus="status">
     			<tr>
-    			<td>${item.boardIdx}</td>
+    			<td>${item.boardNum}</td>
     			<td>${item.userId}</td>
-    			<td>${item.boardTitle}</td>
+    			<td style="cursor: pointer; text-decoration: underline; font-weight: bold;" onClick='boardController._displayBoardContent(${item.boardIdx})'>${item.boardTitle}</td>
     			<td>${item.viewCnt}</td>
     			</tr>
     		</c:forEach>
@@ -84,26 +84,30 @@ request.setCharacterEncoding("UTF-8");
     </tbody>
   </table>
 		
+</div>
+<div id="content-footer" style="width: 65%; margin: auto">
+	<div style="float: right;">
+		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Write</button>
 	</div>
-	<div id="content-footer"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Write</button></div>
 	<c:if test="${linkPage ne 0}">
-	<ul class="pagination">
-<li onclick="boardController._pageMove(1)"><a href="javascript:void(0);"><<</a></li>
-<li onclick="boardController._pageMove(${prevPageIndex})"><a href="javascript:void(0);"><</a></li>
-<c:forEach begin="${prevPageIndex}" end="${nextPageIndex}"  varStatus="status">
-   <c:choose>
-   		<c:when test="${pageIndex eq  status.index}">
-   		<li class="active" onclick="boardController._pageMove(${status.index})"><a href="javascript:void(0);">${status.index}</a></li>
-   		</c:when>
-   		<c:otherwise>
-   		<li onclick="boardController._pageMove(${status.index})"><a href="javascript:void(0);">${status.index}</a></li>
-   		</c:otherwise>
-   </c:choose>
-</c:forEach>
-<li onclick="boardController._pageMove(${nextPageIndex})"><a href="javascript:void(0);">></a></li>
-<li onclick="boardController._pageMove(${linkPage})"><a href="javascript:void(0);">>></a></li>
-</ul>
+	<ul class="pagination" style="margin: auto;">
+		<li onclick="boardController._pageMove(1)"><a href="javascript:void(0);"><<</a></li>
+		<li onclick="boardController._pageMove(${prevPageIndex})"><a href="javascript:void(0);"><</a></li>
+			<c:forEach begin="${prevPageIndex}" end="${nextPageIndex}"  varStatus="status">
+   			<c:choose>
+   			<c:when test="${pageIndex eq  status.index}">
+   			<li class="active" onclick="boardController._pageMove(${status.index})"><a href="javascript:void(0);">${status.index}</a></li>
+   			</c:when>
+   			<c:otherwise>
+   			<li onclick="boardController._pageMove(${status.index})"><a href="javascript:void(0);">${status.index}</a></li>
+   			</c:otherwise>
+   			</c:choose>
+			</c:forEach>
+		<li onclick="boardController._pageMove(${nextPageIndex})"><a href="javascript:void(0);">></a></li>
+		<li onclick="boardController._pageMove(${linkPage})"><a href="javascript:void(0);">>></a></li>
+	</ul>
 	</c:if>
+</div>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -144,9 +148,30 @@ request.setCharacterEncoding("UTF-8");
   </div>
 </div>
 
+<!-- BoardModal -->
+<div id="myBoardModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>
-<script>
+<script type="text/javascript">
 var contextPath = "${pageContext.request.contextPath}";
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/bbs.js"></script>
