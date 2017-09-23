@@ -1,6 +1,7 @@
 # JSP_BBS
 My JSP/Servlet BBS Project<br>
-개인적으로, JSP/Servlet 학습을 위해 가볍게 CRUD 게시판을 제작.
+개인적으로, JSP/Servlet 학습을 위해 가볍게 CRUD 게시판을 제작.<br>
+개발환경 : tomcat 8.5, maria DB(DB명 jsp_board), Java 1.8, jQuery, BootStrap <br>
 
 Servlet ?
 > - 서블릿은 웹서버가 동적인 페이지를 제공할 수 있도록 도와주는 어플리케이션<br>
@@ -37,25 +38,21 @@ JSP (Java Server Page) ?<br>
 - Java 언어를 기반으로 하는, 서버사이드 스크립트 언어.
 - JSP는 하나의 서블릿으로 변환이 된다.
 
-
-
-2017.05.28<br>
-프로젝트 구성 및 git연동<br>
-개발환경 : tomcat 8.5, maria DB(DB명 jsp_board), Java 1.8, jQuery, BootStrap <br>
 <br>
+- 작업 완료 List <br>
+1. 회원 가입 기능 완료
+2. 로그인 기능 완료
+3. 로그아웃 기능 완료
+4. 미로그인 사용자 관련 필터 처리 완료
+5. 게시판 목록 불러오기 완료
+6. 게시판 목록 페이징 처리 완료
+7. 게시판 작성 완료
+8. 게시판 조회수 증가 완료
 
-2017.05.29<br>
-로그인 및 회원가입 프로세스 구현.(session 체크를 위해 filter 연동)<br>
-개발환경 : tomcat 8.5, maria DB(DB명 jsp_board), Java 1.8, jQuery, BootStrap <br>
 <br>
-
-2017.06.04<br>
-bbs_info 라는 테이블 생성 및 BoardInfoBean 및 BoardInfoDao 작성 + 글 작성 시, insert 되는 기능 구현.<br>
-session 값 변경(userInfoBean) + jsp/servlet 호출 시, 리소스 경로 충돌나서 El 내장객체를 사용해서 해결 ${pageContext.request.contextPath}<br>
-개발환경 : tomcat 8.5, maria DB(DB명 jsp_board), Java 1.8, jQuery, BootStrap <br>
-<br>
-
-2017.06.05<br>
-게시판 메인페이지, List 불러오는 기능 구현(EL과 JSTL을 이용해서 구현) + 로그인 시, 로직상 문제 있던 코드 부분 수정<br>
-개발환경 : tomcat 8.5, maria DB(DB명 jsp_board), Java 1.8, jQuery, BootStrap <br>
-
+- 작업 예정 List(솔직히, 언제 할지는 모르겠다.) <br>
+1. ID 쿠키 처리
+2. 회원 정보 수정 및 탈퇴
+3. 게시글 수정 및 삭제
+4. modal 창 close 시, input 태그 초기화
+5. 코드정련 및 리팩토링
