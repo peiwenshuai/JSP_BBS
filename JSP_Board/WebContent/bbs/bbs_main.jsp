@@ -155,13 +155,22 @@ request.setCharacterEncoding("UTF-8");
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+      	<button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="boardTitle"></h4>
+      	<div class="form-group" style="width: 60%">
+    	  	<span class="label label-primary">Writer :</span>
+    		<input type="text" class="form-control" id="userId" disabled="disabled">
+    		<span class="label label-primary">Registration Date :</span>
+    		<input type="text" class="form-control" id="regiDate" disabled="disabled">
+    		<span class="label label-primary">View :</span>
+    		<input type="text" class="form-control" id="viewCnt" disabled="disabled">
+  		</div>
+        
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <p id="boardContent"></p>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer">      
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>

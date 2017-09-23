@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import bean.BoardInfoBean;
 import bean.UserInfoBean;
 import model.BoardModel;
@@ -39,6 +41,7 @@ public class BoardController extends HttpServlet {
 		session = request.getSession();
 		int pageIndex = 1;
 		BoardModel boardModel = new BoardModel();
+		UserInfoBean userInfoBean = (UserInfoBean) session.getAttribute("userInfoBean");
 
 		switch (requestSevletName) {
 		case "board_main.do":
@@ -65,7 +68,6 @@ public class BoardController extends HttpServlet {
 
 		case "board_write.do":
 			// Create
-			UserInfoBean userInfoBean = (UserInfoBean) session.getAttribute("userInfoBean");
 			int isSQL = boardModel.saveBoardContent(userInfoBean, request.getParameter("title"),	request.getParameter("content"));
 			if (isSQL != 0) {
 				response.sendRedirect("../boardController/board_main.do");
@@ -73,10 +75,16 @@ public class BoardController extends HttpServlet {
 			break;
 			
 		case "board_content_read.do" : 
+			int boardIdx = Integer.valueOf(request.getParameter("boardIdx"));
+			JSONObject jsonObject = boardModel.getBoardContent(boardIdx);
+			response.setContentType("application/json");
+			pw = response.getWriter();
+			pw.print(jsonObject);
+			break;
 			
+		case "board_content_delete.do":
 			break;
 		}
-		
 
 	}
 
